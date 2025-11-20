@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app1
-          image: nginx:latest
+          image: wil42/playground:v1
           ports:
             - containerPort: 80
 
@@ -39,7 +39,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: test-app.com
+  - host: will-app.com
     http:
       paths:
       - path: /
