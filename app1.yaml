@@ -1,51 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: will42
+  name: app1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: will42
+      app: app1
   template:
     metadata:
       labels:
-        app: will42
+        app: app1
     spec:
       containers:
-        - name: will42
-          image: wil42/playground:v1
+        - name: app1
+          image: nginx:latest
           ports:
-            - containerPort: 8888
+            - containerPort: 80
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: will42
+  name: app1
 spec:
   selector:
-    app: will42
+    app: app1
   ports:
     - port: 80
-      targetPort: 8888
+      targetPort: 80
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: will42-ingress
+  name: app1-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: will42.com
+  - host: test-app.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: will42
+            name: app1
             port:
-              number: 8888
+              number: 80
