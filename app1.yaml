@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
+  name: wil42
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app1
+      app: wil42
   template:
     metadata:
       labels:
-        app: app1
+        app: wil42
     spec:
       containers:
-        - name: app1
+        - name: wil42
           image: wil42/playground:v1
           ports:
             - containerPort: 8888
@@ -22,10 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1
+  name: wil42
 spec:
   selector:
-    app: app1
+    app: wil42
   ports:
     - port: 8888
       targetPort: 8888
@@ -34,7 +34,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1-ingress
+  name: wil42-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
@@ -46,6 +46,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: app1
+            name: wil42
             port:
               number: 8888
